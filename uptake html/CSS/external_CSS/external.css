@@ -1,0 +1,22 @@
+p{
+    font-size: 30px;
+    color: red;
+    text-align: center;
+    border: 2px solid red;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    
+}
+#male{
+    color: red;
+    text-align: right;
+    text-shadow: 2px 2px black;
+    
+
+}
+button{
+    color:black;
+
+}
+button:hover{background-color:green;}
+
+button:focus{background-color:red;}

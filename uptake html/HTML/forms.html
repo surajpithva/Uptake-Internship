@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>FORMS</title>
+    <style>
+        .one{
+            background-color: rgb(89, 18, 18);
+            border: 3px solid red;
+            width: 20%;
+            color: rgb(13, 255, 13);
+            margin: 30px 600px;
+            border-radius: 15px;
+        }
+    
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;"> HTML Forms Radio Button </h1>
+    <form class="one">
+        <input type="radio" class="suraj"  name="fav_language" value="Html">
+        <label for="html">HTML</label><br>
+        <input type="radio" class="suraj" name="fav_language" value="Css" >
+        <label for="css">CSS</label><br>
+        <input type="radio" class="suraj" name="fav_language" value="Python">
+        <label for="python">Python</label>
+    </form>
+    <h1 style="text-align: center"> HTML Forms Cheak-box button </h1>
+    <form class="two">
+        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+        <label for="vehicle1"> I have a bike</label><br>
+        <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+        <label for="vehicle2"> I have a car</label><br>
+        <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+        <label for="vehicle3"> I have a boat</label>
+
+    
+
+    </form>
+ 
+    <br>
+    <hr>
+    <form>
+        <label for="fname">First name : </label>
+        <input type="text" id="fname" value="x"><br><br>
+        <input type="submit" value="Submit">
+        
+      </form> 
+
+         <!--text area use for unlimited text  -->
+
+         <textarea rows="20" cols="50" placeholder="write here"></textarea>
+  <hr>
+  <hr>
+  <h1> list which are not show in option but suggestionss</h1>
+         <form action="/action_page.php">
+            <input list="browsers">
+            <datalist id="browsers">
+              <option value="Edge">
+              <option value="Firefox">
+              <option value="Chrome">
+              <option value="Opera">
+              <option value="Safari">
+            </datalist>
+          </form>
+    
+
+</body>
+</html>

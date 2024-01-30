@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>TABLE</title>
+    <style>
+        table,tr,td{
+            border: black dotted 2px;
+            /*border radius use for round the table data */
+            border-radius: 4px;
+            /*border collapse use for single border if you want to try difference then comment down below tag
+            border-collapse: collapse;*/
+        }
+        th{
+            background-color: aqua;
+        }
+        
+        th,td{
+            padding-left: 10px;
+            padding-top: 20px;
+            padding-right: 30px;
+            padding-bottom: 40px;
+        }
+        th:nth-child(odd) {
+            background-color: rgba(44, 290, 0, 0.4);
+        }
+        td:nth-child(even){
+            background-color: violet;
+        }
+        
+        h2{
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body> 
+    
+    <!-- table inline css-->
+    <table style="width: 100%;">
+        <!-- caption use for table caption which is by default in center -->
+        <caption>uptake intern data </caption>
+        <colgroup>
+            <col span="1" style="background-color:red">
+            <col span="1" style="background-color:yellow">
+            <col span="2" style="background-color:red">
+          </colgroup>
+        <tr>
+            <!-- this th tag use for table header upr part of header-->
+            <th style="width: 30px;"> Name </th>
+            <th> ID NO </th>
+            <th> Company </th>
+            <th> salary </th>
+        </tr>
+        <tr>
+            <td> suraj </td>
+            <td> 21 </td>
+            <td> uptake </td>
+            <td> 21000 </td>
+        </tr>
+        <tr>
+            <td> aamir </td>
+            <td> 25 </td>
+            <td> uptake infotech </td>
+            <td> 25000</td>
+        </tr>
+    </table>
+    <br> <br>
+    <hr style="height: 10px ;">
+<!-- if we want to create vertical table -->
+<h2 style="text-align: center"> vertical table</h2>
+<table style="width:100%">
+    <tr>
+      <th>Firstname</th>
+      <td>Jill</td>
+      <td>Eve</td>
+    </tr>
+    <tr>
+      <th>Lastname</th>
+      <td>Smith</td>
+      <td>Jackson</td>
+    </tr>
+    <tr>
+      <th>Age</th>  
+      <td>50</td>
+      <td>94</td>
+    </tr>
+  </table>
+  
+</body>
+</html>
