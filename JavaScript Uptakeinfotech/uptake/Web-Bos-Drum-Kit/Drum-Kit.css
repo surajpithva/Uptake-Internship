@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url("./assest/background.jpg");
+    background-size: cover;
+    /* Adjust as needed */
+    font-family: Arial, sans-serif;
+    /* Choose an appropriate font */
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-around;
+    /* Adjust as needed */
+    padding: 20px;
+    /* Adjust spacing around buttons */
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
