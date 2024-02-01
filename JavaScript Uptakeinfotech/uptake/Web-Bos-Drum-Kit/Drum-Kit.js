@@ -5,9 +5,8 @@ const audioF = new Audio("./Sound/kick.wav");
 const audioG = new Audio("./Sound/openhat.wav");
 const audioH = new Audio("./Sound/ride.wav");
 const audioJ = new Audio("./Sound/snare.wav");
-const audioK = new Audio("./Sound/tick.wav");
+const audioK = new Audio("./Sound/tink.wav");
 const audioL = new Audio("./Sound/tom.wav");
-const audioAAmir = new Audio("./Sound/aamir.wav");
 
 document.addEventListener("keydown", function (e) {
   if (e.key === "a" || e.key === "A") {
@@ -37,8 +36,5 @@ document.addEventListener("keydown", function (e) {
   } else if (e.key === "l" || e.key === "L") {
     audioL.play();
     audioL.currentTime = 0;
-  } else {
-    audioAAmir.play();
-    audioAAmir.currentTime = 0;
   }
 });
