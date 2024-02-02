@@ -95,7 +95,31 @@
 // const hello = restaurant.numGuests ?? 10;
 // console.log(hello);
 
-// for of concept
+// (for of) concept
+
+const weekDays = [
+  "Monday",
+  "Tuesday",
+  "Wenenday",
+  "Thurday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
+const openingHours = {
+  [weekDays[0]]: {
+    open: 12,
+    close: 22,
+  },
+  [weekDays[1]]: {
+    open: 11,
+    close: 23,
+  },
+  [weekDays[2]]: {
+    open: 0, //open 24 hours
+    close: 24,
+  },
+};
 
 const restaurant = {
   name: "suraj pithva",
@@ -103,24 +127,88 @@ const restaurant = {
   categories: ["kathiyavadi", "panjabi", "south indian"],
   starterMenu: ["focaccia", "garlic bread", "Caprese Salad"],
   mainMenu: ["Sev tameta", "paneer bhurji", "dosa"],
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, //open 24 hours
-      close: 24,
-    },
-  },
+  openingHours,
+
   order: function (starterMenu, mainMenu) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
 };
 
+// pratice of video no :- 11
 const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
-for (const item of menu.entries()) console.log(item);
+
+//for (const item of menu.entries()) console.log(`${item[0] + 1}:${item[1]}`);
+
+//both answer are valid
+for (const [i, el] of menu.entries()) {
+  console.log(`${i + 1}:${el}`);
+}
+
+// 013 Optional Chaining
+const Days = [
+  "Monday",
+  "Tuesday",
+  "Wenenday",
+  "Thurday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
+
+for (const day of Days) {
+  const open = restaurant.openingHours[day]?.open ?? "closed";
+  console.log(`on ${day} we are open at ${open}`);
+}
+
+// console.log(restaurant.openingHours.Friday?.open);
+
+// if the monday is exist time then print the time otherwise use Optional Chaining for cover the error and simply show undefined
+// console.log(restaurant.openingHours.Monday?.open);
+
+//  Optional Chaining for array
+
+const bio = [
+  {
+    name: "suraj",
+    age: 24,
+    mail: "admin@.com",
+  },
+];
+
+//we also create a if else condition to print this but use  Optional Chaining for code reduce
+
+console.log(bio[0]?.age || "empty");
+
+// if we want to object key then this is the example
+
+for (const hello of Object.keys(openingHours)) {
+  console.log(hello);
+}
+
+// its print the same value but in array
+
+const properties = Object.keys(openingHours);
+console.log(properties);
+
+let openstr = `we are open on ${properties.length} days: `;
+for (const day of properties) {
+  openstr = openstr + `${day},`;
+}
+console.log(openstr);
+
+// property values
+
+const Values = Object.values(openingHours);
+console.log(Values);
+
+// loop for entire object
+const Allthree = Object.entries(openingHours);
+console.log(Allthree);
+
+for (const [key, { open, close }] of Allthree) {
+  console.log(`on ${key} we open at ${open} and close at ${close}`);
+}
+
+// for (const hello of Object.values(openingHours)) {
+//   console.log(hello);
+// }
