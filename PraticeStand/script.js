@@ -69,15 +69,65 @@
 
 //////// the call and apply functions
 
-const indiaAir = {
-  airLine: 123,
-  itaitCode: "FL",
-  airLineName: "INDIGO",
-  bookings: [],
-  book(flightName, name) {
-    console.log(
-      `${name} booked name on ${this.airLine} flight ${this.itaitCode}${this.airLineName}`
-    );
-  },
+// const indiaAir = {
+//   airLine: 123,
+//   itaitCode: "FL",
+//   airLineName: "INDIGO",
+//   bookings: [],
+//   book(flightName, name) {
+//     console.log(
+//       `${name} booked name on ${this.airLine} flight ${this.itaitCode}${this.airLineName}`
+//     );
+//   },
+// };
+// indiaAir.book(239, "BYPAKISTAN");
+
+////////////////////Bind method with Event Listeners
+// indiaAir.plans = 300;
+// indiaAir.buyplane = function () {
+//   console.log(this);
+//   this.plans++;
+//   console.log(this.plans);
+// };
+// document
+//   .querySelector(".buy")
+//   .addEventListener("click", luftana.buyplane.bind(indiaAir));
+
+//partial function
+// const addTax = (rate, value) => value + value * rate;
+// console.log(addTax(10, 20));
+
+// const addVat = addTax.bind(null, 3);
+
+// console.log(addVat(10));
+
+//////////////functions into functions
+
+// const addTax = function (rate) {
+//   return function (value) {
+//     return value + value * rate;
+//   };
+// };
+// const addVat = addTax(10);
+// console.log(addVat(2));
+
+/////////////////////////////////////////// [ Immediately Invoked Function Expressions ] /////////////////////////////////////////////
+
+// (function () {
+//   console.log("this is how run Immediately Invoked Function Expressions ");
+// })();
+
+// (() =>
+//   console.log("this is how run Immediately Invoked Function Expressions"))();
+
+const secureBooking = function () {
+  let passengerCount = 0;
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passenger`);
+  };
 };
-indiaAir.book(239, "BYPAKISTAN");
+const booker = secureBooking();
+booker();
+booker();
+// secureBooking();
