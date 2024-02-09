@@ -1,28 +1,28 @@
 const account1 = {
-  owner: "suraj pithva",
+  owner: "Suraj Pithva",
   movements: [200, 500, 450, 120, 170, 169, -400, -920],
   interestRate: 1.2,
   pin: 1111,
 };
 const account2 = {
-  owner: "parth pithva",
+  owner: "Parth Pithva",
   movements: [5200, 1500, -450, 1120, 1070, 1069, -4000, 920],
   interestRate: 1.5,
   pin: 2222,
 };
 const account3 = {
-  owner: "darshan pithva",
+  owner: "Darshan Pithva",
   movements: [1200, -500, 45, -20, 70, 16, -4000, 920],
   interestRate: 0.7,
   pin: 3333,
 };
 const account4 = {
-  owner: "pratik pithva",
+  owner: "Atul Pithva",
   movements: [200, 50, 50, 150, -170, 156, 400, -520],
   interestRate: 1.0,
   pin: 4444,
 };
-const account = [account1, account2, account3, account4];
+const accounts = [account1, account2, account3, account4];
 
 ///////////////////////////////////////////////////////////////////////////////
 const labelWelcome = document.querySelector(".welcome");
@@ -68,3 +68,26 @@ const displayMoments = function (movements) {
   });
 };
 displayMoments(account1.movements);
+
+///////////////////////////////////computing User-Name//////////////////////////////////////////////////////////
+
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(" ")
+      .map((name) => name[0])
+      .join("");
+  });
+};
+createUsernames(accounts);
+console.log(accounts);
+
+///////////////////////calcucate the balance////////////////////////
+
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+
+calcDisplayBalance(account1.movements);
