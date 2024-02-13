@@ -1,6 +1,6 @@
 const account1 = {
-  owner: "Suraj Pithva",
-  movements: [200, 500, 450, 120, 170, 169, -400, -920],
+  owner: "Sid Soni",
+  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
   interestRate: 1.2,
   pin: 1111,
 };
@@ -52,23 +52,46 @@ const inputClosePin = document.querySelector(".form__input--pin");
 
 ////////////////////////////////////////////////////////////////////////////
 
-const displayMoments = function (movements) {
-  containerMovements.innerHTML = "";
-  movements.forEach((mov, i) => {
-    const type = mov > 0 ? "deposit" : "withdrawal";
-    const html = `
-        <div class="movements__row">
-            <div class="movements__type movements__type--${type}">${
-      i + 1
-    } ${type}</div>
-            <div class="movements__value">${mov}</div>
-        </div>
-    `;
-    containerMovements.insertAdjacentHTML("afterbegin", html);
-  });
-};
-displayMoments(account1.movements);
+// const displayMoments = function (movements) {
+//   containerMovements.innerHTML = "";
+//   movements.forEach((mov, i) => {
+//     const type = mov > 0 ? "deposit" : "withdrawal";
+//     const html = `
+//         <div class="movements__row">
+//             <div class="movements__type movements__type--${type}">${
+//       i + 1
+//     } ${type}</div>
+//             <div class="movements__value">${mov}</div>
+//         </div>
+//     `;
+//     containerMovements.insertAdjacentHTML("afterbegin", html);
+//   });
+// };
+//displayMoments(account1.movements);
 
+/////////////////////////////////////calculate incomes , outcomes  and interest
+const calcDisplaySummery = function (acc) {
+  const incomes = acc.movements
+    .filter((mov) => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes}💶`;
+
+  const outcomes = acc.movements
+    .filter((mov) => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${Math.abs(outcomes)}`;
+
+  const interst = acc.movements
+    .filter((mov) => mov > 0)
+    .map((deposit) => (deposit * acc.interestRate) / 100)
+    .filter((int, i, arr) => {
+      console.log(arr);
+      return int >= 1;
+    })
+    .reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `${interst}`;
+};
+//calcDisplaySummery(account1.movements);
 ///////////////////////////////////computing User-Name//////////////////////////////////////////////////////////
 
 const createUsernames = function (accs) {
@@ -81,13 +104,134 @@ const createUsernames = function (accs) {
   });
 };
 createUsernames(accounts);
+
+const updateUI = function (acc) {
+  //DISPLAY MOVEMENTS
+
+  displayMoments(acc.movements);
+
+  //DISPLAY BALANCE
+  calcDisplayBalance(acc);
+  //DISPLAY SUMMARY
+  calcDisplaySummery(acc);
+};
+
 console.log(accounts);
 
 ///////////////////////calcucate the balance////////////////////////
 
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${balance} EUR`;
+const calcDisplayBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+
+  labelBalance.textContent = `${acc.balance} EUR`;
 };
 
-calcDisplayBalance(account1.movements);
+//calcDisplayBalance(account1.movements);
+
+///////////////////Event handler
+let currentAccount;
+btnLogin.addEventListener("click", function (e) {
+  //Prevent form from subbmiting
+  e.preventDefault();
+  currentAccount = accounts.find(
+    (acc) => acc.username === inputLoginUsername.value
+  );
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    //DISPLAY UI AND MESSAGE
+    labelWelcome.textContent = `welcome back, ${
+      currentAccount.owner.split(" ")[0]
+    }`;
+    containerApp.style.opacity = 100;
+
+    //after successful log in input filed are hide
+    // inputLoginUsername.style.display = "none";
+    // inputLoginPin.style.display = "none";
+    // btnLogin.style.display = "none";
+
+    //clear input fields(username and pin)
+    inputLoginUsername.value = inputLoginPin.value = "";
+
+    // this below code for if you once log in your foucs is not input fidlds
+    inputLoginPin.blur();
+
+    updateUI(currentAccount);
+  }
+});
+
+btnTransfer.addEventListener("click", function (e) {
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(
+    (acc) => acc.username === inputTransferTo.value
+  );
+  if (
+    amount > 0 &&
+    currentAccount.balance >= amount &&
+    receiverAcc?.username !== currentAccount.username
+  ) {
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+    updateUI(currentAccount);
+  }
+});
+///////////////////////Task ///////
+// const displayMoments = function (movements) {
+//   containerMovements.innerHTML = "";
+//   movements.forEach((mov, i) => {
+//     const type = mov > 0 ? "deposit" : "withdrawal";
+//     const html = `
+//         <div class="movements__row">
+//             <div class="movements__type movements__type--${type}">${
+//       i + 1
+//     } ${type}</div>
+//             <div class="movements__value">${mov}</div>
+//         </div>
+//     `;
+//     containerMovements.insertAdjacentHTML("afterbegin", html);
+//   });
+// };
+function val() {
+  d = document.getElementById("selected_id").value;
+  if (d == "withdrawal") {
+    console.log("aa");
+    const displayMoments = function (movements) {
+      containerMovements.innerHTML = "";
+      if (mov > 0) {
+      }
+
+      movements.forEach((mov, i) => {
+        const type = mov > 0 ? "deposit" : "withdrawal";
+        const html = `
+        <div class="movements__row">
+            <div class="movements__type movements__type--${type}">${
+          i + 1
+        } ${type}</div>
+            <div class="movements__value">${mov}</div>
+        </div>
+    `;
+        containerMovements.insertAdjacentHTML("afterbegin", html);
+      });
+    };
+    displayMoments(account1.movements);
+  } else if (d == "deposit") {
+    console.log("bb");
+  } else if (d == "all") {
+    console.log("cc");
+    const displayMoments = function (movements) {
+      containerMovements.innerHTML = "";
+      movements.forEach((mov, i) => {
+        const type = mov > 0 ? "deposit" : "withdrawal";
+        const html = `
+        <div class="movements__row">
+            <div class="movements__type movements__type--${type}">${
+          i + 1
+        } ${type}</div>
+            <div class="movements__value">${mov}</div>
+        </div>
+    `;
+        containerMovements.insertAdjacentHTML("afterbegin", html);
+      });
+    };
+    displayMoments(account1.movements);
+  }
+}
