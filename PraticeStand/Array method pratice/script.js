@@ -42,3 +42,19 @@ console.log(currenciess);
 currenciess.forEach(function (key, value) {
   console.log(`${key} : ${value}`);
 });
+
+//SORT THE ARRAYS(ASCENDING)
+const movements1 = movements.sort((a, b) => a - b);
+// const movements1 = movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// });
+
+console.log(movements1);
+
+//SORT THE ARRAYS(DESCENDING)
+const movements2 = movements.sort((a, b) => {
+  if (a > b) return -1;
+  if (a < b) return 1;
+});
+console.log(movements2);

@@ -44,30 +44,29 @@
           <p class="balance__date">
             As of <span class="date">05/03/2037</span>
           </p>
+          <div>
+            <select id="selected_id" onchange="val()" class="btnSelect">
+              <option value="all">All</option>
+              <option value="deposit">Deposit</option>
+              <option value="withdrawal">Withdrawal</option>
+            </select>
+          </div>
         </div>
         <p class="balance__value">0000€</p>
-        <select id="selected_id" onchange="val()">
-          <option value="" selected disabled>select Data</option>
-          <option value="all">All</option>
-          <option value="deposit">Deposit</option>
-          <option value="withdrawal">Withdrawal</option>
-        </select>
       </div>
 
       <!-- MOVEMENTS -->
       <div class="movements">
-        <!-- <div class="movements__row">
-          <div class="movements__type movements__type--deposit">2 deposit</div>
-          <div class="movements__date">3 days ago</div>
-          <div class="movements__value">4 000€</div>
-        </div> -->
-        <!-- <div class="movements__row">
-          <div class="movements__type movements__type--withdrawal">
-            1 withdrawal
-          </div>
-          <div class="movements__date">24/01/2037</div>
-          <div class="movements__value">-378€</div>
-        </div> -->
+        <div class="movements__row">
+          <div class="movements__type movements__type--deposit"></div>
+          <div class="movements__date"></div>
+          <div class="movements__value"></div>
+        </div>
+        <div class="movements__row">
+          <div class="movements__type movements__type--withdrawal"></div>
+          <div class="movements__date"></div>
+          <div class="movements__value"></div>
+        </div>
       </div>
 
       <!-- SUMMARY -->
