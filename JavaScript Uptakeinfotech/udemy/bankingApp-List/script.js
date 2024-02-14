@@ -72,8 +72,12 @@ const inputClosePin = document.querySelector(".form__input--pin");
 // };
 // displayMoments(account1.movements);
 
-const displayMoments = function (movements) {
+//display data with filter
+
+const displayMoments = function (movements, sort = false) {
   containerMovements.innerHTML = "";
+  // sort method use here for sorting
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
   movements.forEach((mov, i) => {
     const type = mov > 0 ? "deposit" : "withdrawal";
     const html = `
@@ -105,11 +109,6 @@ function filterWithdraw(movements) {
 
   containerMovements.innerHTML = data;
 }
-// const calcDisplayBalance = function (acc) {
-//   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-
-//   labelBalance.textContent = `${acc.balance} EUR`;
-// };
 
 //deposits
 function filterDeposits(movements) {
@@ -153,28 +152,8 @@ function val() {
 }
 
 console.log(account1.movements);
-//Display the data with function
-// const displayMoments = function (movements, sort = false) {
-//   containerMovements.innerHTML = "";
 
-//   //sort method use here for sorting
-//   const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
-//   movs.forEach((mov, i) => {
-//     const type = mov > 0 ? "deposit" : "withdrawal";
-//     const html = `
-//           <div class="movements__row">
-//               <div class="movements__type movements__type--${type}">${
-//       i + 1
-//     } ${type}</div>
-//               <div class="movements__value">${mov}</div>
-//           </div>
-//       `;
-//     containerMovements.insertAdjacentHTML("afterbegin", html);
-//   });
-// };
-// displayMoments(account1.movements);
-
-/////////////////////////////////////calculate incomes , outcomes  and interest
+/////////////////////////////////////calculate incomes , outcomes  and interest////////////////////////////////
 const calcDisplaySummery = function (acc) {
   const incomes = acc.movements
     .filter((mov) => mov > 0)
@@ -224,11 +203,12 @@ const updateUI = function (acc) {
 
 console.log(accounts);
 
-///////////////////////calcucate the balance////////////////////////
+//////////////////////////////////calcucate the balance///////////////////////////////////////////
 
 const calcDisplayBalance = (data) => {
   console.log(data, "in calc");
   const total_amt = data.reduce((acc, mov) => acc + mov, 0);
+  currentAccount.balance = total_amt;
   labelBalance.textContent = `${total_amt} EUR`;
 };
 
@@ -249,11 +229,6 @@ btnLogin.addEventListener("click", function (e) {
     }`;
     containerApp.style.opacity = 100;
 
-    //after successful log in input filed are hide
-    // inputLoginUsername.style.display = "none";
-    // inputLoginPin.style.display = "none";
-    // btnLogin.style.display = "none";
-
     //clear input fields(username and pin)
     inputLoginUsername.value = inputLoginPin.value = "";
 
@@ -268,10 +243,6 @@ btnLogin.addEventListener("click", function (e) {
 btnLoan.addEventListener("click", function (e) {
   e.preventDefault(e);
   const amount = Number(inputLoanAmount.value);
-
-  // const isValidate = amount > 0;
-
-  // console.log(isValidate);
 
   if (
     amount > 0 &&
@@ -292,18 +263,20 @@ btnTransfer.addEventListener("click", function (e) {
     (acc) => acc.username === inputTransferTo.value
   );
   inputTransferAmount.value = inputTransferTo.value = "";
-  if (
+  const checkIf =
     amount > 0 &&
     currentAccount.balance >= amount &&
-    receiverAcc?.username !== currentAccount.username
-  ) {
+    receiverAcc?.username !== currentAccount.username;
+  console.log(checkIf);
+
+  if (checkIf) {
     currentAccount.movements.push(-amount);
     receiverAcc.movements.push(amount);
     updateUI(currentAccount);
   }
 });
 
-//////when click on button account delete
+/////////////////////////////when click on button account delete////////////////////////
 btnClose.addEventListener("click", function (e) {
   e.preventDefault();
   if (
@@ -322,7 +295,7 @@ btnClose.addEventListener("click", function (e) {
   }
 });
 
-// For sort method start from here
+// ////////////////////////////For sort method start from here///////////////////////////////////
 
 let sorted = false;
 btnSort.addEventListener("click", function (e) {
@@ -331,21 +304,43 @@ btnSort.addEventListener("click", function (e) {
   sorted = !sorted;
 });
 
-////////////////////////
+/////////////////////////Pratice for reduce method this code  is not part of game ///////////////////////
+const { deposits, withdraws } = accounts
+  .flatMap((acc) => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      cur > 0 ? (sums.deposits += cur) : (sums.withdraws += cur);
+      // sums[cur > 0 ? "deposits" : "withdraws"] += cur;
+      return sums;
+    },
+    {
+      deposits: 0,
+      withdraws: 0,
+    }
+  );
+console.log(deposits, withdraws);
 
-///////////////////////Task ///////
-// const displayMoments = function (movements) {
-//   containerMovements.innerHTML = "";
-//   movements.forEach((mov, i) => {
-//     const type = mov > 0 ? "deposit" : "withdrawal";
-//     const html = `
-//         <div class="movements__row">
-//             <div class="movements__type movements__type--${type}">${
-//       i + 1
-//     } ${type}</div>
-//             <div class="movements__value">${mov}</div>
-//         </div>
-//     `;
-//     containerMovements.insertAdjacentHTML("afterbegin", html);
-//   });
-// };
+////////////////////////////////////////preFixed Operator ////////////////////////////////////////
+//NOTE:- use ++ operator before console than you  js give original value
+let a = 10;
+console.log(a++);
+console.log(a++);
+console.log(a++);
+
+let b = 10;
+console.log(++b);
+
+/////////////////////////Example of convert string into array with function
+const convertTitleCase = function (title) {
+  const expections = ["a", "an", "the", "but", "or", "on", "in", "with"];
+  const tileCase = title
+    .toLowerCase()
+    .split(" ")
+    .map((word) =>
+      expections.includes(word) ? word : word[0].toUpperCase() + word.slice(1)
+    );
+  return tileCase;
+};
+console.log(convertTitleCase("this is nice title"));
+console.log(convertTitleCase("this is LONG title but  not long TOO"));
+console.log(convertTitleCase(" and here is another title with EXAMPLE"));
