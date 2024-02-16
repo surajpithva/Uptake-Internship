@@ -299,11 +299,10 @@ h2 {
 }
 
 .btnSelect {
-    background-color: #66c873;
-    font-size: larger;
+    background-color: #68e72d;
 
 }
 
 .btnSelect:hover {
-    background-color: rgb(11, 198, 231);
+    background-color: rgb(5, 132, 5);
 }
