@@ -179,4 +179,3 @@ getCountryData("India");
 // getCountryData('australia');
 
 /////////////////////////////////////////CHALLAGE//////////////////////////////
-const whereAmI = function () {};

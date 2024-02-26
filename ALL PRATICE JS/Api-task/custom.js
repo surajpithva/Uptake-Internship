@@ -1,9 +1,9 @@
 const productsContainer = document.querySelector(".products");
 const productContainer = document.querySelector(".prod");
+
 const getProductsData = () => {
   fetch(`https://fakestoreapi.com/products`)
     .then((response) => {
-      // console.log(response);
       return response.json();
     })
     .then((data) => {
@@ -13,13 +13,9 @@ const getProductsData = () => {
               <img src="${data[index].image}" alt=""/>
             </div>
             <div class="title pt-4 pb-1">${data[index].category}</div>
-            <div class="price">${data[index].price}</div>
-            
-            <button type="button" class="btn btn-primary" onclick="openModal(${data[index].id})">Open Modal</button>
+            <div class="price">${data[index].price}$</div>
 
-
-
-
+            <button type="button" class="btn btn-primary" onclick="openModal(${data[index].id})">More Details</button>
         `;
         productsContainer.insertAdjacentHTML("beforeend", html);
       });
@@ -27,112 +23,74 @@ const getProductsData = () => {
 };
 
 getProductsData();
-function openModal(id) {
+
+const openModal = function (id) {
   document.querySelector(".myModal").style.display = "block";
-  console.log(id);
+  const title = document.getElementById("title");
+  const image = document.getElementById("myImage");
+  const desc = document.getElementById("description");
+  const category = document.getElementById("category");
+  const price = document.getElementById("price");
+  const rate = document.getElementById("rate");
+  const readMore = document.getElementById("readMore");
+  // const dots = document.getElementById("dots");
+  // const moreText = document.getElementById("more");
+  // const btnText = document.getElementById("myBtn");
+
   fetch(`https://fakestoreapi.com/products/${id}`)
     .then((response) => {
-      // console.log(response);
       return response.json();
     })
     .then((data) => {
-      console.log(data.price);
-      const html = `
-      
-        <img src="${data.image}" alt=""/>
-     
-      <div class="title pt-4 pb-1">${data.category}</div>
-      <div class="price">${data.price}</div>
+      image.src = data.image;
+      title.innerHTML = data.title;
+      desc.innerHTML = data.description.slice(0, 90);
+      if (data.description.trim() > 90) {
+      }
 
+      console.log(data.description);
+      // console.log(data.description.slice(0, 100), "...");
 
+      // if (data.description.trim() > 100) {
+      //   const hello = `<a href="">...read more${data.description}</a> `;
+      // } else {
+      //   desc.innerHTML = data.description;
+      // }
 
-
-  `;
-
-      productContainer.insertAdjacentHTML("beforeend", html);
+      category.innerHTML = data.category;
+      price.innerHTML = data.price;
+      rate.innerHTML = data.rating.rate;
     });
-}
+};
 
+// if(data.description > )
+// function myFunction() {
+//   var dots = document.getElementById("dots");
+//   var moreText = document.getElementById("more");
+//   var btnText = document.getElementById("myBtn");
+
+//   if (dots.style.display === "none") {
+//     dots.style.display = "inline";
+//     btnText.innerHTML = "Read more";
+//     moreText.style.display = "none";
+//   } else {
+//     dots.style.display = "none";
+//     btnText.innerHTML = "Read less";
+//     moreText.style.display = "inline";
+//   }
+// }
 function closeModal() {
   document.querySelector(".myModal").style.display = "none";
 }
-// function openmodel() {
-//   document.getElementById("exampleModal").style.display = "block";
-// }
-// const fetchDataBtn = document.querySelector("#fetchdata");
-// const result = document.querySelector("#result");
 
-// // gets data from API and sets the content of #result div
-// const getData = function () {
-//   result.innerText = "Loading....";
-//   fetch("https:///fakestoreapi.com/products")
-//     .then((res) => res.json())
-//     .then((data) => {
-//       result.innerText = JSON.stringify(data, null, 2);
-//     })
-//     .catch((error) => console.log(error));
-// };
-
-// // add event listener for #fetchdata button
-// fetchDataBtn.addEventListener("click", getData);
-
-// const fullDataSummery = () => {
-//   fetch(`https://fakestoreapi.com/products`)
-//     .then((response) => {
-//       return response.json();
-//     })
-//     .then((data) => {
-//       data.map((number, index) => {
-//         const htmlone = `
-//       <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#aboutUs">
-//       More Details /button>
-//       `;
-//       });
-
-//       productsContainer.insertAdjacentHTML("beforeend", htmlone);
-//     });
-// };
-// fullDataSummery();
-
-//     <div
-//       class="modal fade"
-//       id="aboutUs"
-//       data-bs-backdrop="static"
-//       data-bs-keyboard="false"
-//       tabindex="-1"
-//       aria-labelledby="aboutUsLabel"
-//       aria-hidden="true"
-//     >
-//       <div class="modal-dialog">
-//         <div class="modal-content">
-//           <div class="modal-header">
-//             <h1 class="modal-title fs-5" id="aboutUsLabel">
-//               GFG | About Us
-//             </h1>
-//             <button
-//               type="button"
-//               class="btn-close"
-//               data-bs-dismiss="modal"
-//               aria-label="Close"
-//             ></button>
-//           </div>
-//           <div class="modal-body">
-//             millions of programmers. <br />
-//             <h5 class="mt-3">What we offer</h5>
-
-//             Experts, Internship opportunities and Job Opportunities.
-//           </div>
-//           <div class="modal-footer">
-//             <button
-//               type="button"
-//               class="btn btn-secondary"
-//               data-bs-dismiss="modal"
-//             >
-//               Close
-//             </button>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   </div>
-// </div>
+// const looterticket = new Promise(function (resolve, reject) {
+//   console.log("there is drawing happping");
+//   setTimeout(function () {
+//     if (Math.random() >= 0.5) {
+//       resolve("you will win");
+//     } else {
+//       reject(new Error("you lost your money"));
+//     }
+//   }, 2000);
+// });
+// looterticket.then((res) => console.log(res)).catch((err) => console.error(err));
